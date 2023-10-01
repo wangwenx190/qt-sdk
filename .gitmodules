@@ -22,18 +22,6 @@
 	path = qtdeclarative
 	url = ../../qt/qtdeclarative.git
 	branch = dev
-[submodule "qtquick3d"]
-	path = qtquick3d
-	url = ../../qt/qtquick3d.git
-	branch = dev
-[submodule "qtquick3dphysics"]
-	path = qtquick3dphysics
-	url = ../../qt/qtquick3dphysics.git
-	branch = dev
-[submodule "qtgraphs"]
-	path = qtgraphs
-	url = ../../qt/qtgraphs.git
-	branch = dev
 [submodule "qthttpserver"]
 	path = qthttpserver
 	url = ../../qt/qthttpserver.git

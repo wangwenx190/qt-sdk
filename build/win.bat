@@ -51,16 +51,22 @@ if /i "%__static%" == "1" (
     set __cmake_dir=%__cmake_dir%_shared
     set __install_dir=%__install_dir%_shared
 )
-set __bat_params=-prefix "%~dp0%__install_dir%" -c++std c++20 -nomake tests -nomake examples -mimetype-database-compression zstd
+set __config_params=-prefix "%~dp0%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20
+set __build_params=--build . --target all --parallel
+set __install_params=--install .
 if /i "%__debug%" == "1" (
-    set __bat_params=%__bat_params% -debug
+    set __config_params=%__config_params% -debug
+    set __build_params=%__build_params% --config Debug
+    set __install_params=%__install_params% --config Debug
 ) else (
-    set __bat_params=%__bat_params% -release -ltcg -strip
+    set __config_params=%__config_params% -release -ltcg
+    set __build_params=%__build_params% --config Release
+    set __install_params=%__install_params% --config Release --strip
 )
 if /i "%__static%" == "1" (
-    set __bat_params=%__bat_params% -static -static-runtime
+    set __config_params=%__config_params% -static -static-runtime
 ) else (
-    set __bat_params=%__bat_params% -shared -disable-deprecated-up-to 0x070000
+    set __config_params=%__config_params% -shared -disable-deprecated-up-to 0x070000
 )
 set __need_vs=0
 if /i "%__msvc%" == "1" set __need_vs=1
@@ -74,9 +80,13 @@ if exist %__cmake_dir% rd /s /q %__cmake_dir%
 if exist %__install_dir% rd /s /q %__install_dir%
 md %__cmake_dir%
 cd %__cmake_dir%
-call "%__qt_dir%\configure.bat" %__bat_params%
-cmake --build . --parallel
-cmake --install .
+call "%__qt_dir%\configure.bat" %__config_params%
+cmake %__build_params%
+cmake %__install_params%
+cd /d "%~dp0"
+if exist %__install_dir%.7z del /f %__install_dir%.7z
+set __7z_params=-mx -myx -ms=on -mqs=on -mmt=on -m0=LZMA2:d=256m:fb=273
+7z a %__install_dir%.7z %__install_dir%\ %__7z_params%
 endlocal
 cd /d "%~dp0"
 pause
