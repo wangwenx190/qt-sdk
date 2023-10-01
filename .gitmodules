@@ -1,0 +1,48 @@
+[submodule "qtbase"]
+	path = qtbase
+	url = ../../wangwenx190/qtbase.git
+	branch = custom
+[submodule "qt5compat"]
+	path = qt5compat
+	url = ../../qt/qt5compat.git
+	branch = dev
+[submodule "qtimageformats"]
+	path = qtimageformats
+	url = ../../qt/qtimageformats.git
+	branch = dev
+[submodule "qtsvg"]
+	path = qtsvg
+	url = ../../qt/qtsvg.git
+	branch = dev
+[submodule "qttools"]
+	path = qttools
+	url = ../../qt/qttools.git
+	branch = dev
+[submodule "qtshadertools"]
+	path = qtshadertools
+	url = ../../qt/qtshadertools.git
+	branch = dev
+[submodule "qtdeclarative"]
+	path = qtdeclarative
+	url = ../../qt/qtdeclarative.git
+	branch = dev
+[submodule "qtquick3d"]
+	path = qtquick3d
+	url = ../../qt/qtquick3d.git
+	branch = dev
+[submodule "qtquick3dphysics"]
+	path = qtquick3dphysics
+	url = ../../qt/qtquick3dphysics.git
+	branch = dev
+[submodule "qtgraphs"]
+	path = qtgraphs
+	url = ../../qt/qtgraphs.git
+	branch = dev
+[submodule "qtmultimedia"]
+	path = qtmultimedia
+	url = ../../qt/qtmultimedia.git
+	branch = dev
+[submodule "qthttpserver"]
+	path = qthttpserver
+	url = ../../qt/qthttpserver.git
+	branch = dev
