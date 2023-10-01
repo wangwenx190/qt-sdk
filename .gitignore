@@ -44,3 +44,5 @@ build.user.sh
 *.rc
 *.qm
 Thumbs.db
+*.bat
+*.sh
