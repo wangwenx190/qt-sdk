@@ -23,17 +23,21 @@ set __static=0
 if /i "%__type%" == "static" set __static=1
 set __debug=0
 if /i "%__config%" == "debug" set __debug=1
+set __platform=win32
 set __cmake_dir=cmake
 set __install_dir=qt_sdk
 if /i "%__msvc%" == "1" (
+    set __platform=%__platform%-msvc
     set __cmake_dir=%__cmake_dir%_msvc
     set __install_dir=%__install_dir%_msvc
 )
 if /i "%__clangcl%" == "1" (
+    set __platform=%__platform%-clang-msvc
     set __cmake_dir=%__cmake_dir%_clangcl
     set __install_dir=%__install_dir%_clangcl
 )
 if /i "%__mingw%" == "1" (
+    set __platform=%__platform%-clang-g++
     set __cmake_dir=%__cmake_dir%_mingw
     set __install_dir=%__install_dir%_mingw
 )
@@ -51,7 +55,7 @@ if /i "%__static%" == "1" (
     set __cmake_dir=%__cmake_dir%_shared
     set __install_dir=%__install_dir%_shared
 )
-set __config_params=-prefix "%~dp0%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20
+set __config_params=-platform %__platform% -prefix "%~dp0%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20
 set __build_params=--build . --target all --parallel
 set __install_params=--install .
 if /i "%__debug%" == "1" (
