@@ -63,7 +63,7 @@ if /i "%__debug%" == "1" (
     set __build_params=%__build_params% --config Debug
     set __install_params=%__install_params% --config Debug
 ) else (
-    set __config_params=%__config_params% -release -ltcg
+    set __config_params=%__config_params% -release
     set __build_params=%__build_params% --config Release
     set __install_params=%__install_params% --config Release --strip
 )
@@ -84,6 +84,8 @@ if exist %__cmake_dir% rd /s /q %__cmake_dir%
 if exist %__install_dir% rd /s /q %__install_dir%
 md %__cmake_dir%
 cd %__cmake_dir%
+set QT_ENABLE_VCLTL=1
+set QT_ENABLE_YYTHUNKS=1
 call "%__qt_dir%\configure.bat" %__config_params%
 cmake %__build_params%
 cmake %__install_params%
