@@ -63,7 +63,7 @@ if /i "%__debug%" == "1" (
     set __build_params=%__build_params% --config Debug
     set __install_params=%__install_params% --config Debug
 ) else (
-    set __config_params=%__config_params% -release
+    set __config_params=%__config_params% -release -ltcg
     set __build_params=%__build_params% --config Release
     set __install_params=%__install_params% --config Release --strip
 )
