@@ -22,3 +22,7 @@
 	path = qthttpserver
 	url = ../../qt/qthttpserver.git
 	branch = dev
+[submodule "qtdeclarative"]
+	path = qtdeclarative
+	url = ../../wangwenx190/qtdeclarative.git
+	branch = custom
