@@ -18,10 +18,6 @@
 	path = qtshadertools
 	url = ../../qt/qtshadertools.git
 	branch = dev
-[submodule "qtdeclarative"]
-	path = qtdeclarative
-	url = ../../qt/qtdeclarative.git
-	branch = dev
 [submodule "qthttpserver"]
 	path = qthttpserver
 	url = ../../qt/qthttpserver.git
