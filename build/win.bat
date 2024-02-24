@@ -56,7 +56,7 @@ if /i "%__static%" == "1" (
     set __install_dir=%__install_dir%_shared
 )
 set __config_params=-platform %__platform% -prefix "%~dp0%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20
-set __build_params=--build . --target all --parallel
+set __build_params=--build . --parallel
 set __install_params=--install .
 if /i "%__debug%" == "1" (
     set __config_params=%__config_params% -debug
@@ -71,6 +71,11 @@ if /i "%__static%" == "1" (
     set __config_params=%__config_params% -static -static-runtime
 ) else (
     set __config_params=%__config_params% -shared -disable-deprecated-up-to 0x070000
+)
+if /i "%__debug%" == "0" (
+    if /i "%__static%" == "0" (
+        set __config_params=!__config_params! -ltcg
+    )
 )
 set __need_vs=0
 if /i "%__msvc%" == "1" set __need_vs=1
