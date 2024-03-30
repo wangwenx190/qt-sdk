@@ -26,3 +26,7 @@
 	path = qtdeclarative
 	url = ../../wangwenx190/qtdeclarative.git
 	branch = custom
+[submodule "vcpkg"]
+	path = vcpkg
+	url = ../../microsoft/vcpkg.git
+	branch = master
