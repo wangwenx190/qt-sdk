@@ -24,8 +24,8 @@ if /i "%__type%" == "static" set __static=1
 set __debug=0
 if /i "%__config%" == "debug" set __debug=1
 set __platform=win32
-set __cmake_dir=cmake
-set __install_dir=qt_sdk
+set __cmake_dir=%~dp0cmake
+set __install_dir=%~dp0qt_sdk
 set __vcpkg_dir=%~dp0..\vcpkg
 set __vcpkg_install_dir=%__vcpkg_dir%\installed\x64-windows
 ::set VCPKG_ROOT=%__vcpkg_dir%
@@ -88,8 +88,8 @@ set ICU_IO_LIBRARY=%ICU_LIB_DIR%\icuio.lib
 set ICU_INCLUDE_DIRS=%ICU_INCLUDE_DIR%
 set ICU_LIBRARIES=%ICU_I18N_LIBRARY%;%ICU_UC_LIBRARY%;%ICU_DATA_LIBRARY%;%ICU_IO_LIBRARY%
 :: -vcpkg: we need this parameter to enable VCPKG integration, but here we don't need VCPKG, because we have set the required CMake variables already.
-set __config_params=-platform %__platform% -prefix "%~dp0%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20 -icu -verbose
-set __build_params=--build . --parallel
+set __config_params=-platform %__platform% -prefix "%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20 -icu -verbose
+set __build_params=--build . --target all --parallel
 set __install_params=--install .
 if /i "%__debug%" == "1" (
     set __config_params=%__config_params% -debug
