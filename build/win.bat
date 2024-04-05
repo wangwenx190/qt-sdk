@@ -135,6 +135,8 @@ if /i "%__static%" == "1" (
 )
 copy /y "%OPENSSL_LIB_DIR%\*.lib" "%__install_dir%\lib"
 copy /y "%ICU_LIB_DIR%\*.lib" "%__install_dir%\lib"
+xcopy "%OPENSSL_INCLUDE_DIR%" "%__install_dir%\include" /s /i /f /r /y
+xcopy "%ICU_INCLUDE_DIR%" "%__install_dir%\include" /s /i /f /r /y
 cd /d "%~dp0"
 if exist %__install_dir%.7z del /f %__install_dir%.7z
 set __7z_params=-mx -myx -ms=on -mqs=on -mmt=on -m0=LZMA2:d=256m:fb=273
