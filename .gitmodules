@@ -30,3 +30,19 @@
 	path = vcpkg
 	url = ../../microsoft/vcpkg.git
 	branch = master
+[submodule "qtquick3d"]
+	path = qtquick3d
+	url = ../../wangwenx190/qtquick3d.git
+	branch = custom
+[submodule "qtquickeffectmaker"]
+	path = qtquickeffectmaker
+	url = ../../qt/qtquickeffectmaker.git
+	branch = dev
+[submodule "qtgraphs"]
+	path = qtgraphs
+	url = ../../qt/qtgraphs.git
+	branch = dev
+[submodule "qtlanguageserver"]
+	path = qtlanguageserver
+	url = ../../qt/qtlanguageserver.git
+	branch = dev
