@@ -75,20 +75,21 @@ set OPENSSL_SSL_LIBRARY=%OPENSSL_LIB_DIR%\libssl.lib
 set OPENSSL_INCLUDE_DIRS=%OPENSSL_INCLUDE_DIR%
 set OPENSSL_LIBRARIES=%OPENSSL_CRYPTO_LIBRARY%;%OPENSSL_SSL_LIBRARY%
 :: ICU
-set ICU_DIR=%__vcpkg_install_dir%
-set ICU_ROOT=%ICU_DIR%
-set ICU_ROOT_DIR=%ICU_ROOT%
-set ICU_BIN_DIR=%ICU_ROOT_DIR%\bin
-set ICU_INCLUDE_DIR=%ICU_ROOT_DIR%\include
-set ICU_LIB_DIR=%ICU_ROOT_DIR%\lib
-set ICU_I18N_LIBRARY=%ICU_LIB_DIR%\icuin.lib
-set ICU_UC_LIBRARY=%ICU_LIB_DIR%\icuuc.lib
-set ICU_DATA_LIBRARY=%ICU_LIB_DIR%\icudt.lib
-set ICU_IO_LIBRARY=%ICU_LIB_DIR%\icuio.lib
-set ICU_INCLUDE_DIRS=%ICU_INCLUDE_DIR%
-set ICU_LIBRARIES=%ICU_I18N_LIBRARY%;%ICU_UC_LIBRARY%;%ICU_DATA_LIBRARY%;%ICU_IO_LIBRARY%
+::set ICU_DIR=%__vcpkg_install_dir%
+::set ICU_ROOT=%ICU_DIR%
+::set ICU_ROOT_DIR=%ICU_ROOT%
+::set ICU_BIN_DIR=%ICU_ROOT_DIR%\bin
+::set ICU_INCLUDE_DIR=%ICU_ROOT_DIR%\include
+::set ICU_LIB_DIR=%ICU_ROOT_DIR%\lib
+::set ICU_I18N_LIBRARY=%ICU_LIB_DIR%\icuin.lib
+::set ICU_UC_LIBRARY=%ICU_LIB_DIR%\icuuc.lib
+::set ICU_DATA_LIBRARY=%ICU_LIB_DIR%\icudt.lib
+::set ICU_IO_LIBRARY=%ICU_LIB_DIR%\icuio.lib
+::set ICU_INCLUDE_DIRS=%ICU_INCLUDE_DIR%
+::set ICU_LIBRARIES=%ICU_I18N_LIBRARY%;%ICU_UC_LIBRARY%;%ICU_DATA_LIBRARY%;%ICU_IO_LIBRARY%
 :: -vcpkg: we need this parameter to enable VCPKG integration, but here we don't need VCPKG, because we have set the required CMake variables already.
-set __config_params=-platform %__platform% -prefix "%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20 -icu -verbose
+::-icu
+set __config_params=-platform %__platform% -prefix "%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20 -verbose
 set __build_params=--build . --target all --parallel
 set __install_params=--install .
 if /i "%__debug%" == "1" (
@@ -131,12 +132,12 @@ if /i "%__static%" == "1" (
     rem Nothing to do here
 ) else (
     copy /y "%OPENSSL_BIN_DIR%\*.dll" "%__install_dir%\bin"
-    copy /y "%ICU_BIN_DIR%\*.dll" "%__install_dir%\bin"
+    ::copy /y "%ICU_BIN_DIR%\*.dll" "%__install_dir%\bin"
 )
 copy /y "%OPENSSL_LIB_DIR%\*.lib" "%__install_dir%\lib"
-copy /y "%ICU_LIB_DIR%\*.lib" "%__install_dir%\lib"
+::copy /y "%ICU_LIB_DIR%\*.lib" "%__install_dir%\lib"
 xcopy "%OPENSSL_INCLUDE_DIR%" "%__install_dir%\include" /s /i /f /r /y
-xcopy "%ICU_INCLUDE_DIR%" "%__install_dir%\include" /s /i /f /r /y
+::xcopy "%ICU_INCLUDE_DIR%" "%__install_dir%\include" /s /i /f /r /y
 cd /d "%~dp0"
 if exist %__install_dir%.7z del /f %__install_dir%.7z
 set __7z_params=-mx -myx -ms=on -mqs=on -mmt=on -m0=LZMA2:d=256m:fb=273
