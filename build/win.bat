@@ -132,7 +132,7 @@ if /i "%__static%" == "1" (
     rem Nothing to do here
 ) else (
     copy /y "%OPENSSL_BIN_DIR%\*.dll" "%__install_dir%\bin"
-    ::copy /y "%ICU_BIN_DIR%\*.dll" "%__install_dir%\bin"
+    rem copy /y "%ICU_BIN_DIR%\*.dll" "%__install_dir%\bin"
 )
 copy /y "%OPENSSL_LIB_DIR%\*.lib" "%__install_dir%\lib"
 ::copy /y "%ICU_LIB_DIR%\*.lib" "%__install_dir%\lib"
