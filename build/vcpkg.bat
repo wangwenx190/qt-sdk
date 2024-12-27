@@ -6,8 +6,8 @@ cls
 set __vcpkg_dir=%~dp0..\vcpkg
 set __triplet_dir=%~dp0vcpkg-custom-triplets
 ::set __port_dir=%~dp0vcpkg-custom-ports
-set __qt_deps=openssl
-set __vcpkg_triplets=x64-windows-shared-mt-release x64-windows-static-mt-release
+set __qt_deps=openssl[ssl3]
+set __vcpkg_triplets=x64-windows-shared-mt-release
 ::set __debug_flags=--debug --debug-env --printmetrics
 set __debug_flags=
 cd /d "%__vcpkg_dir%"
