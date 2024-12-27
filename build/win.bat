@@ -88,23 +88,26 @@ set OPENSSL_LIBRARIES=%OPENSSL_CRYPTO_LIBRARY%;%OPENSSL_SSL_LIBRARY%
 ::set ICU_INCLUDE_DIRS=%ICU_INCLUDE_DIR%
 ::set ICU_LIBRARIES=%ICU_I18N_LIBRARY%;%ICU_UC_LIBRARY%;%ICU_DATA_LIBRARY%;%ICU_IO_LIBRARY%
 :: -vcpkg: we need this parameter to enable VCPKG integration, but here we don't need VCPKG, because we have set the required CMake variables already.
-::-icu
+:: -icu
 set __config_params=-platform %__platform% -prefix "%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20 -verbose
-set __build_params=--build . --target all --parallel
-set __install_params=--install .
+set __build_target=install
+if /i "%__debug%" == "0" (
+    if /i "%__mingw%" == "1" (
+        set __build_target=!__build_target!/strip
+    )
+)
+set __build_params=--build . --target %__build_target% --parallel
 if /i "%__debug%" == "1" (
     set __config_params=%__config_params% -debug
     set __build_params=%__build_params% --config Debug
-    set __install_params=%__install_params% --config Debug
 ) else (
     set __config_params=%__config_params% -release
     set __build_params=%__build_params% --config Release
-    set __install_params=%__install_params% --config Release --strip
 )
 if /i "%__static%" == "1" (
     set __config_params=%__config_params% -static -static-runtime -openssl-linked
 ) else (
-    set __config_params=%__config_params% -shared -disable-deprecated-up-to 0x070000 -openssl-runtime
+    set __config_params=%__config_params% -shared -disable-deprecated-up-to 0x0A0000 -openssl-runtime
 )
 if /i "%__debug%" == "0" (
     if /i "%__static%" == "0" (
@@ -127,10 +130,7 @@ set QT_ENABLE_VCLTL=1
 set QT_ENABLE_YYTHUNKS=1
 call "%__qt_dir%\configure.bat" %__config_params%
 cmake %__build_params%
-cmake %__install_params%
-if /i "%__static%" == "1" (
-    rem Nothing to do here
-) else (
+if /i "%__static%" == "0" (
     copy /y "%OPENSSL_BIN_DIR%\*.dll" "%__install_dir%\bin"
     rem copy /y "%ICU_BIN_DIR%\*.dll" "%__install_dir%\bin"
 )
