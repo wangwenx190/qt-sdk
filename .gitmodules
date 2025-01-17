@@ -30,10 +30,6 @@
 	path = vcpkg
 	url = ../../microsoft/vcpkg.git
 	branch = master
-[submodule "qtgraphs"]
-	path = qtgraphs
-	url = ../../qt/qtgraphs.git
-	branch = dev
 [submodule "qtlanguageserver"]
 	path = qtlanguageserver
 	url = ../../qt/qtlanguageserver.git
