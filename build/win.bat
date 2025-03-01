@@ -109,11 +109,12 @@ if /i "%__static%" == "1" (
 ) else (
     set __config_params=%__config_params% -shared -disable-deprecated-up-to 0x0A0000 -openssl-runtime
 )
-if /i "%__debug%" == "0" (
-    if /i "%__static%" == "0" (
-        set __config_params=!__config_params! -ltcg
-    )
-)
+:: MSVC + LTCG is causing too many bugs!
+::if /i "%__debug%" == "0" (
+::    if /i "%__static%" == "0" (
+::        set __config_params=!__config_params! -ltcg
+::    )
+::)
 set __need_vs=0
 if /i "%__msvc%" == "1" set __need_vs=1
 if /i "%__clangcl%" == "1" set __need_vs=1
