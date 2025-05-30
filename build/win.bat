@@ -120,14 +120,18 @@ if /i "%__clangcl%" == "1" set __need_vs=1
 if /i "%__need_vs%" == "1" call "%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
 set __qt_dir=%~dp0..
 set __qtbase_dir=%__qt_dir%\qtbase
-set PATH=%__qtbase_dir%\bin;%PATH%
-cd /d "%~dp0"
+set PATH=%OPENSSL_BIN_DIR%;%ICU_BIN_DIR%;%__qtbase_dir%\bin;%PATH%
+cd /d "%~dp0."
 if exist %__cmake_dir% rd /s /q %__cmake_dir%
 if exist %__install_dir% rd /s /q %__install_dir%
 md %__cmake_dir%
 cd %__cmake_dir%
-set QT_ENABLE_VCLTL=1
-set QT_ENABLE_YYTHUNKS=1
+::set QT_ENABLE_VCLTL=0
+::set QT_ENABLE_YYTHUNKS=0
+if /i "%__debug%" == "0" (
+    set QT_ENABLE_VCLTL=1
+    set QT_ENABLE_YYTHUNKS=1
+)
 call "%__qt_dir%\configure.bat" %__config_params%
 cmake %__build_params%
 if /i "%__static%" == "0" (
@@ -138,11 +142,11 @@ copy /y "%OPENSSL_LIB_DIR%\*.lib" "%__install_dir%\lib"
 copy /y "%ICU_LIB_DIR%\*.lib" "%__install_dir%\lib"
 xcopy "%OPENSSL_INCLUDE_DIR%" "%__install_dir%\include" /s /i /f /r /y
 xcopy "%ICU_INCLUDE_DIR%" "%__install_dir%\include" /s /i /f /r /y
-cd /d "%~dp0"
+cd /d "%~dp0."
 if exist %__install_dir%.7z del /f %__install_dir%.7z
 set __7z_params=-mx -myx -ms=on -mqs=on -mmt=on -m0=LZMA2:d=64m:fb=64
 7z a %__install_dir%.7z %__install_dir%\ %__7z_params%
 endlocal
-cd /d "%~dp0"
+cd /d "%~dp0."
 pause
 exit /b 0
