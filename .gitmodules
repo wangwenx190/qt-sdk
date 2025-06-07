@@ -54,7 +54,3 @@
 	path = qtquick3dphysics
 	url = ../../qt/qtquick3dphysics.git
 	branch = dev
-[submodule "qtmultimedia"]
-	path = qtmultimedia
-	url = ../../qt/qtmultimedia.git
-	branch = dev
