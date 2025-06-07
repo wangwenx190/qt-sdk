@@ -12,12 +12,12 @@ set cmake_scripts_dir=%script_dir_path%\cmake
 :: The space before the '>' makes sure that when we have a digit at the end of the args, we
 :: don't accidentally concatenate it with the '>' resulting in '0>' or '2>' which redirects into the
 :: file from a stream different than stdout, leading to broken or empty content.
-echo.%* >config.tl.opt.in
+echo.%* >init-repository.opt.in
 
-call cmake -DIN_FILE=config.tl.opt.in -DOUT_FILE=config.tl.opt ^
+call cmake -DIN_FILE=init-repository.opt.in -DOUT_FILE=init-repository.opt ^
     -P "%cmake_scripts_dir%\QtWriteArgsFile.cmake"
-call cmake -DOPTFILE=config.tl.opt -DTOP_LEVEL_SRC_PATH="%script_dir_path%" ^
-    -P "%cmake_scripts_dir%\QtTopLevelConfigureScript.cmake"
+call cmake -DOPTFILE=init-repository.opt ^
+    -P "%cmake_scripts_dir%\QtIRScript.cmake"
 
-del config.tl.opt.in
-del config.tl.opt
+del init-repository.opt.in
+del init-repository.opt
