@@ -2,10 +2,6 @@
 	path = qtbase
 	url = ../../wangwenx190/qtbase.git
 	branch = custom
-[submodule "qt5compat"]
-	path = qt5compat
-	url = ../../qt/qt5compat.git
-	branch = dev
 [submodule "qtimageformats"]
 	path = qtimageformats
 	url = ../../qt/qtimageformats.git
