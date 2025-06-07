@@ -30,3 +30,31 @@
 	path = qtlanguageserver
 	url = ../../qt/qtlanguageserver.git
 	branch = dev
+[submodule "qtquicktimeline"]
+	path = qtquicktimeline
+	url = ../../qt/qtquicktimeline.git
+	branch = dev
+[submodule "qtwebsockets"]
+	path = qtwebsockets
+	url = ../../qt/qtwebsockets.git
+	branch = dev
+[submodule "qtlottie"]
+	path = qtlottie
+	url = ../../qt/qtlottie.git
+	branch = dev
+[submodule "qtquick3d"]
+	path = qtquick3d
+	url = ../../wangwenx190/qtquick3d.git
+	branch = custom
+[submodule "qtgraphs"]
+	path = qtgraphs
+	url = ../../qt/qtgraphs.git
+	branch = dev
+[submodule "qtquick3dphysics"]
+	path = qtquick3dphysics
+	url = ../../qt/qtquick3dphysics.git
+	branch = dev
+[submodule "qtmultimedia"]
+	path = qtmultimedia
+	url = ../../qt/qtmultimedia.git
+	branch = dev
