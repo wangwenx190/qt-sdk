@@ -1,7 +1,7 @@
 [submodule "qtbase"]
 	path = qtbase
 	url = ../../wangwenx190/qtbase.git
-	branch = custom
+	branch = custom2
 [submodule "qtimageformats"]
 	path = qtimageformats
 	url = ../../qt/qtimageformats.git
