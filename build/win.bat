@@ -90,7 +90,8 @@ if /i "%__static%" == "1" (
 ::set ICU_INCLUDE_DIRS=%ICU_INCLUDE_DIR%
 ::set ICU_LIBRARIES=%ICU_I18N_LIBRARY%;%ICU_UC_LIBRARY%;%ICU_DATA_LIBRARY%;%ICU_IO_LIBRARY%
 :: -vcpkg: we need this parameter to enable VCPKG integration, but here we don't need VCPKG, because we have set the required CMake variables already.
-set __config_params=-platform %__platform% -prefix "%__install_dir%" -nomake tests -nomake examples -icu -feature-relocatable -feature-c++20 -verbose
+:: -icu
+set __config_params=-platform %__platform% -prefix "%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20 -verbose
 set __build_target=install
 if /i "%__debug%" == "0" (
     if /i "%__mingw%" == "1" (
