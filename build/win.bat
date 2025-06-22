@@ -1,4 +1,5 @@
 @echo off
+color
 chcp 65001
 title Building Qt SDK ...
 setlocal enabledelayedexpansion
@@ -91,7 +92,7 @@ if /i "%__static%" == "1" (
 ::set ICU_LIBRARIES=%ICU_I18N_LIBRARY%;%ICU_UC_LIBRARY%;%ICU_DATA_LIBRARY%;%ICU_IO_LIBRARY%
 :: -vcpkg: we need this parameter to enable VCPKG integration, but here we don't need VCPKG, because we have set the required CMake variables already.
 :: -icu
-set __config_params=-platform %__platform% -prefix "%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20 -verbose
+set __config_params=-platform %__platform% -prefix "%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20 -reduce-exports -force-bundled-libs -verbose
 set __build_target=install
 if /i "%__debug%" == "0" (
     if /i "%__mingw%" == "1" (
@@ -107,6 +108,7 @@ if /i "%__debug%" == "1" (
     set __build_params=%__build_params% --config Release
 )
 if /i "%__static%" == "1" (
+    :: ZLIB_USE_STATIC_LIBS=ON OPENSSL_USE_STATIC_LIBS=ON
     set __config_params=%__config_params% -static -static-runtime -openssl-linked
 ) else (
     set __config_params=%__config_params% -shared -disable-deprecated-up-to 0x0A0000 -openssl-runtime
@@ -136,8 +138,13 @@ cd %__cmake_dir%
 ::    set QT_ENABLE_VCLTL=1
 ::    set QT_ENABLE_YYTHUNKS=1
 ::)
+echo Configure command: call "%__qt_dir%\configure.bat" %__config_params%
 call "%__qt_dir%\configure.bat" %__config_params%
+if %errorlevel% neq 0 goto err
+echo Build command: cmake %__build_params%
 cmake %__build_params%
+if %errorlevel% neq 0 goto err
+goto succ
 ::if /i "%__static%" == "0" (
 ::    copy /y "%OPENSSL_BIN_DIR%\*.dll" "%__install_dir%\bin"
 ::    copy /y "%ICU_BIN_DIR%\*.dll" "%__install_dir%\bin"
@@ -150,7 +157,14 @@ cmake %__build_params%
 ::if exist %__install_dir%.7z del /f %__install_dir%.7z
 ::set __7z_params=-mx -myx -ms=on -mqs=on -mmt=on -m0=LZMA2:d=64m:fb=64
 ::7z a %__install_dir%.7z %__install_dir%\ %__7z_params%
-endlocal
+:err
+color C0
+goto fin
+:succ
+color A0
+goto fin
+:fin
 cd /d "%~dp0."
+endlocal
 pause
 exit /b 0
