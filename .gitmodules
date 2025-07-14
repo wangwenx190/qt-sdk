@@ -54,3 +54,7 @@
 	path = qtquick3dphysics
 	url = ../../qt/qtquick3dphysics.git
 	branch = dev
+[submodule "qtgrpc"]
+	path = qtgrpc
+	url = ../../qt/qtgrpc.git
+	branch = dev
