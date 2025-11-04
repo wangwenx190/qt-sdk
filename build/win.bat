@@ -115,7 +115,7 @@ if /i "%__static%" == "1" (
     set __config_params=%__config_params% -static -static-runtime
 ) else (
     :: -openssl-runtime
-    set __config_params=%__config_params% -shared -disable-deprecated-up-to 0x0A0000
+    set __config_params=%__config_params% -shared
 )
 :: MSVC + LTCG is causing too many bugs!
 ::if /i "%__debug%" == "0" (
