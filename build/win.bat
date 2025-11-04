@@ -92,7 +92,10 @@ if /i "%__static%" == "1" (
 ::set ICU_LIBRARIES=%ICU_I18N_LIBRARY%;%ICU_UC_LIBRARY%;%ICU_DATA_LIBRARY%;%ICU_IO_LIBRARY%
 :: -vcpkg: we need this parameter to enable VCPKG integration, but here we don't need VCPKG, because we have set the required CMake variables already.
 :: -icu
-set __config_params=-platform %__platform% -prefix "%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20 -reduce-exports -force-bundled-libs -verbose
+set __config_params=-platform %__platform% -prefix "%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20 -force-bundled-libs -verbose
+if /i "%__mingw%" == "1" (
+    set __config_params=%__config_params% -reduce-exports
+)
 set __build_target=install
 if /i "%__debug%" == "0" (
     if /i "%__mingw%" == "1" (
@@ -108,10 +111,11 @@ if /i "%__debug%" == "1" (
     set __build_params=%__build_params% --config Release
 )
 if /i "%__static%" == "1" (
-    :: ZLIB_USE_STATIC_LIBS=ON OPENSSL_USE_STATIC_LIBS=ON
-    set __config_params=%__config_params% -static -static-runtime -openssl-linked
+    :: ZLIB_USE_STATIC_LIBS=ON OPENSSL_USE_STATIC_LIBS=ON -openssl-linked
+    set __config_params=%__config_params% -static -static-runtime
 ) else (
-    set __config_params=%__config_params% -shared -disable-deprecated-up-to 0x0A0000 -openssl-runtime
+    :: -openssl-runtime
+    set __config_params=%__config_params% -shared -disable-deprecated-up-to 0x0A0000
 )
 :: MSVC + LTCG is causing too many bugs!
 ::if /i "%__debug%" == "0" (
