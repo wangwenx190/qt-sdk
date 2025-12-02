@@ -6,6 +6,7 @@ setlocal enabledelayedexpansion
 cls
 cd /d "%~dp0."
 if exist env.bat call env.bat
+if exist LITE_BUILD set __lite_build=1
 set __compiler=%1
 set __type=%2
 set __config=%3
@@ -95,6 +96,9 @@ if /i "%__static%" == "1" (
 set __config_params=-platform %__platform% -prefix "%__install_dir%" -nomake tests -nomake examples -feature-relocatable -feature-c++20 -force-bundled-libs -verbose
 if /i "%__mingw%" == "1" (
     set __config_params=%__config_params% -reduce-exports
+)
+if /i "%__lite_build%" == "1" (
+    set __config_params=%__config_params% -skip qtgraphs -skip qtgrpc -skip qthttpserver -skip qtimageformats -skip qtlanguageserver -skip qtlottie -skip qtquick3d -skip qtquick3dphysics -skip qtquicktimeline -skip qtshadertools -skip qtsvg -skip qtwebsockets
 )
 set __build_target=install
 if /i "%__debug%" == "0" (
