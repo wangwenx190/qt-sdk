@@ -130,7 +130,7 @@ if /i "%__static%" == "1" (
 set __need_vs=0
 if /i "%__msvc%" == "1" set __need_vs=1
 if /i "%__clangcl%" == "1" set __need_vs=1
-if /i "%__need_vs%" == "1" call "%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+if /i "%__need_vs%" == "1" call "%ProgramFiles%\Microsoft Visual Studio\2026\Community\VC\Auxiliary\Build\vcvars64.bat"
 set __qt_dir=%~dp0..
 set __qtbase_dir=%__qt_dir%\qtbase
 ::set PATH=%OPENSSL_BIN_DIR%;%ICU_BIN_DIR%;%__qtbase_dir%\bin;%PATH%
