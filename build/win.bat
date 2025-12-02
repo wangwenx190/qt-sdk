@@ -98,7 +98,8 @@ if /i "%__mingw%" == "1" (
     set __config_params=%__config_params% -reduce-exports
 )
 if /i "%__lite_build%" == "1" (
-    set __config_params=%__config_params% -skip qtgraphs -skip qtgrpc -skip qthttpserver -skip qtimageformats -skip qtlanguageserver -skip qtlottie -skip qtquick3d -skip qtquick3dphysics -skip qtquicktimeline -skip qtshadertools -skip qtsvg -skip qtwebsockets
+    ::-skip qtshadertools: sadly QtQuick requires QtShaderTools, so we can't really skip it!
+    set __config_params=%__config_params% -skip qtgraphs -skip qtgrpc -skip qthttpserver -skip qtimageformats -skip qtlanguageserver -skip qtlottie -skip qtquick3d -skip qtquick3dphysics -skip qtquicktimeline -skip qtsvg -skip qtwebsockets
 )
 set __build_target=install
 if /i "%__debug%" == "0" (
