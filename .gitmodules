@@ -1,7 +1,7 @@
 [submodule "qtbase"]
 	path = qtbase
 	url = ../../wangwenx190/qtbase.git
-	branch = custom2
+	branch = custom3
 [submodule "qtimageformats"]
 	path = qtimageformats
 	url = ../../qt/qtimageformats.git
@@ -26,17 +26,9 @@
 	path = vcpkg
 	url = ../../microsoft/vcpkg.git
 	branch = master
-[submodule "qtlanguageserver"]
-	path = qtlanguageserver
-	url = ../../qt/qtlanguageserver.git
-	branch = dev
 [submodule "qtquicktimeline"]
 	path = qtquicktimeline
 	url = ../../qt/qtquicktimeline.git
-	branch = dev
-[submodule "qtwebsockets"]
-	path = qtwebsockets
-	url = ../../qt/qtwebsockets.git
 	branch = dev
 [submodule "qtlottie"]
 	path = qtlottie
